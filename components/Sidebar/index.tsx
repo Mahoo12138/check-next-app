@@ -7,7 +7,7 @@ import Image from "next/image";
 import SidebarItem from "./SidebarItem";
 import ClickOutside from "../ClickOutside";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading } from '@chakra-ui/react';
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -329,17 +329,27 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
-      <Flex as='aside' direction='column' background=""
-        className={`fixed left-0 top-0 z-9999 h-screen w-72.5 overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      <Flex
+        as='aside'
+        direction='column'
+        background="rgb(28 36 52)"
+        zIndex="9999"
+        css={{
+          position: "fixed", top: '0', left: '0',
+          height: '100vh', width: '18.125rem',
+          overflowY: 'hidden',
+          color: 'rgb(100 116 139)'
+        }}
+        className={`duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         {/* <!-- SIDEBAR HEADER --> */}
-        <Flex alignItems="center" justifyContent="space-between" gap="2" className="gap-2 px-6 py-5.5 lg:py-6.5">
+        <Flex alignItems="center" justifyContent="space-between" gap="2px" px='24px' py="26px" lg={{ py: "26px" }}>
           <Link href="/">
             <Image
               width={176}
               height={32}
-              src={"/images/logo/logo.svg"}
+              src={"static/logo/logo.svg"}
               alt="Logo"
               priority
             />
@@ -372,11 +382,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <Box as='nav' className="mt-5 px-4 py-4 lg:mt-9 lg:px-6">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
-                <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
+                <Heading as="h3" mb="16px" ml="16px" fontSize="sm" fontWeight="semibold" className="text-bodydark2">
                   {group.name}
-                </h3>
+                </Heading>
 
-                <Flex as="ul" direction="column" gap="1.5" mt="6">
+                <Flex as="ul" direction="column" gap="1.5px" mt="6px">
                   {group.menuItems.map((menuItem, menuIndex) => (
                     <SidebarItem
                       key={menuIndex}

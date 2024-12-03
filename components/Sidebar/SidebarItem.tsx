@@ -1,7 +1,16 @@
+/*
+ * @Author: Mahoo12138 mahoo12138@qq.com
+ * @Date: 2024-12-02 17:13:50
+ * @LastEditors: Mahoo12138 mahoo12138@qq.com
+ * @LastEditTime: 2024-12-03 13:46:31
+ * @FilePath: \check-next-app\components\Sidebar\SidebarItem.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React from "react";
-import Link from "next/link";
+import NextLink from "next/link";
 import SidebarDropdown from "./SidebarDropdown";
 import { usePathname } from "next/navigation";
+import { Box, Link } from "@chakra-ui/react";
 
 const SidebarItem = ({ item, pageName, setPageName }: any) => {
   const handleClick = () => {
@@ -26,17 +35,27 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
     <>
       <li>
         <Link
+          as={NextLink}
           href={item.route}
           onClick={handleClick}
-          className={`${isItemActive ? "bg-graydark dark:bg-meta-4" : ""} group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}
+          color="rgb(222 228 238)"
+          position="relative"
+          display="flex"
+          rounded="sm"
+          transitionDuration=".3s"
+          py="2"
+          px="4"
+          css={{
+            alignItems: 'center'
+          }}
+          className={`${isItemActive ? "bg-graydark dark:bg-meta-4" : ""} group gap-2.5 px-4 py-2  ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}
         >
           {item.icon}
           {item.label}
           {item.children && (
             <svg
-              className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
-                pageName === item.label.toLowerCase() && "rotate-180"
-              }`}
+              className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${pageName === item.label.toLowerCase() && "rotate-180"
+                }`}
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -54,13 +73,13 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
         </Link>
 
         {item.children && (
-          <div
-            className={`translate transform overflow-hidden ${
-              pageName !== item.label.toLowerCase() && "hidden"
-            }`}
+          <Box
+            overflow="hidden"
+            hidden={pageName !== item.label.toLowerCase()}
+            className={`translate transform overflow-hidden}`}
           >
             <SidebarDropdown item={item.children} />
-          </div>
+          </Box>
         )}
       </li>
     </>

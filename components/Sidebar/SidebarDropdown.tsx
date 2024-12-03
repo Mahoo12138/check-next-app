@@ -1,26 +1,39 @@
 import React from "react";
-import Link from "next/link";
+import NextLink from "next/link";
 import { usePathname } from "next/navigation";
+import { Flex, Link } from "@chakra-ui/react";
 
 const SidebarDropdown = ({ item }: any) => {
   const pathname = usePathname();
 
   return (
     <>
-      <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
+      <Flex direction="column" as="ul" mb="1.5rem" mt="1.25rem" pl="1.5rem" gap=".625rem" >
         {item.map((item: any, index: number) => (
           <li key={index}>
             <Link
+              as={NextLink}
               href={item.route}
-              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                pathname === item.route ? "text-white" : ""
-              }`}
+              css={{
+                color: pathname === item.route ? "rgb(255 255 255)" : "",
+                "&:hover": {
+                  color: "rgb(255 255 255)",
+                }
+              }}
+              position="relative"
+              px="1rem"
+              display="flex"
+              alignItems="center"
+              gap=".625rem"
+              fontWeight="medium"
+              rounded="md"
+              className={`group text-bodydark2 duration-300 ease-in-out }`}
             >
               {item.label}
             </Link>
           </li>
         ))}
-      </ul>
+      </Flex>
     </>
   );
 };

@@ -21,7 +21,10 @@
     "customConditions": ["source"],
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./src/*"]
+      "#app/*": ["./app/*"],
+      "#components/*": ["./components/*"],
+      "#hooks/*": ["./hooks/*"]
+
     }
   },
   "exclude": ["node_modules"],
